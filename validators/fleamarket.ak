@@ -39,6 +39,7 @@ validator contract {
                 (datum == output.is_unique(utxo))?,
                 (reference_script |> option.is_none)?,
                 token.is_contained(value, market_datum.token)?,
+                (market_datum.token.amt > 0)?,
               }
             }
           }

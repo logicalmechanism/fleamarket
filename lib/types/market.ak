@@ -11,6 +11,7 @@ pub type Redeemer {
   RemoveOrUpdate
 }
 
+// need to trace the address to know how to build it
 test trace_address() {
   let addr: Address =
     address.from_verification_key(

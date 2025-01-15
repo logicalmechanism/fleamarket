@@ -1,6 +1,6 @@
 //// Portions of this code are derived from [jpg-store] (https://github.com/jpg-store/contracts-v3/tree/main), licensed under the Apache License 2.0.
 //// Changes made to the original jpg-store code:
-//// - Made their datum tag a function.
+//// - Made datum tag a function.
 //// - Changed function names.
 //// - Finding the payment output returns a singular output and not a list.
 ////
@@ -44,6 +44,7 @@ pub fn find_payment(outputs: List<Output>, output_offset: Int) -> Output {
 
 fn do_find_payment(outputs: List<Output>, current_index: Int) -> Output {
   if current_index == 0 {
+    // we just want this output only here
     expect [output, ..] = outputs
     output
   } else {
