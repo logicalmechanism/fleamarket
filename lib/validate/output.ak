@@ -15,6 +15,7 @@ pub fn is_unique(output_reference: OutputReference) -> Datum {
     |> InlineDatum
 }
 
+// need to trace output reference to know its structure
 test output_reference_is_unique() {
   let output_reference: OutputReference =
     OutputReference {

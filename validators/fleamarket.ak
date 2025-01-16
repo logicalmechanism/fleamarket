@@ -22,7 +22,7 @@ validator contract {
           when redeemer is {
             // user may remove or update
             RemoveOrUpdate ->
-              signature.is_valid(extra_signatories, market_datum.address)
+              signature.is_valid(extra_signatories, market_datum.address)?
             // user may buy this
             Buy(output_offset) -> {
               // find the payment output for this input and check all the fields
@@ -33,6 +33,7 @@ validator contract {
               // will contain a datum to defeat the double satisfaction problem. The
               // output may not contain any reference scripts and the value must either
               // be just ADA or ADA and the token. The token amount must be positive.
+              // The tokens on this input may go anywhere the buyer wants them to go.
               //
               and {
                 (address == market_datum.address)?,

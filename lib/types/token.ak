@@ -7,11 +7,11 @@ pub type Token {
 }
 
 pub fn is_contained(self: Value, token: Token) -> Bool {
-  // if ada then the value can only be ada
   if and {
     token.pid == assets.ada_policy_id,
     token.tkn == assets.ada_asset_name,
   } {
+    // if ada then the value can only be ada
     expect [(_, _, amt)]: List<(PolicyId, AssetName, Int)> =
       assets.flatten(self)
     token.amt == amt
