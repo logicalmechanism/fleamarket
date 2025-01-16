@@ -8,7 +8,7 @@ pub fn is_valid(
 ) -> Bool {
   when owner.payment_credential is {
     VerificationKey(pkh) -> list.has(extra_signatories, pkh)
-    // scripts can not sign so let it be spendable
+    // scripts can't sign so let be spendable
     _ -> True
   }
 }

@@ -45,10 +45,10 @@ validator contract {
             }
           }
         } else {
-          // its not the Datum type
+          // its not the Datum type so let be spendable
           True
         }
-      // there is no datum on it
+      // there is no datum on it so let be spendable
       None -> True
     }
   }
