@@ -1,3 +1,6 @@
+////
+////
+
 use aiken/option
 use cardano/transaction.{Output, OutputReference, Transaction}
 use types/market.{Buy, Datum, Redeemer, RemoveOrUpdate}
@@ -18,11 +21,14 @@ validator contract {
       Some(market_datum) ->
         if market_datum is Datum {
           let Transaction { outputs, extra_signatories, .. } = transaction
+          //
           // it is the Datum type so check the redeemer
           when redeemer is {
+            //
             // user may remove or update
             RemoveOrUpdate ->
               signature.is_valid(extra_signatories, market_datum.address)?
+            //
             // user may buy this
             Buy(output_offset) -> {
               // find the payment output for this input and check all the fields
