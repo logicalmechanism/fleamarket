@@ -1,5 +1,6 @@
 use aiken/collection/list
 use aiken/crypto.{VerificationKeyHash}
+use aiken/primitive/bytearray
 use cardano/address.{Address, VerificationKey}
 
 pub fn is_valid(
@@ -7,8 +8,14 @@ pub fn is_valid(
   owner: Address,
 ) -> Bool {
   when owner.payment_credential is {
-    VerificationKey(pkh) -> list.has(extra_signatories, pkh)
-    // scripts can't sign so let be spendable
+    VerificationKey(pkh) ->
+      if bytearray.length(pkh) == 28 {
+        list.has(extra_signatories, pkh)
+      } else {
+        // improper keys can't sign so let it be spendable
+        True
+      }
+    // scripts can't sign so let it be spendable
     _ -> True
   }
 }

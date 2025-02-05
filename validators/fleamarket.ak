@@ -31,6 +31,7 @@ validator contract {
             //
             // user may buy this
             Buy(output_offset) -> {
+              //
               // find the payment output for this input and check all the fields
               let Output { address, value, datum, reference_script } =
                 output.find_payment(outputs, output_offset)
@@ -51,9 +52,11 @@ validator contract {
             }
           }
         } else {
+          //
           // its not the Datum type so let be spendable
           True
         }
+      //
       // there is no datum on it so let be spendable
       None -> True
     }
