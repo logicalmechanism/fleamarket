@@ -9,8 +9,8 @@ market_script_path="../contracts/market_contract.plutus"
 market_script_address=$(${cli} address build --payment-script-file ${market_script_path} ${network})
 
 # # always false to hold script utxo
-# always_false_script_path="../contracts/always_false_contract.plutus"
-# script_reference_address=$(${cli} conway address build --payment-script-file ${always_false_script_path} ${network})
+always_false_script_path="../contracts/always_false_contract.plutus"
+script_reference_address=$(${cli} conway address build --payment-script-file ${always_false_script_path} ${network})
 
 # get current parameters
 mkdir -p ./tmp
@@ -23,9 +23,9 @@ echo -e "\n \033[1;35m ${market_script_address} \033[0m \n";
 ${cli} conway query utxo --address ${market_script_address} ${network}
 ${cli} conway query utxo --address ${market_script_address} ${network} --out-file ./tmp/current_market_utxos.json
 
-# echo -e "\033[1;35m Script Reference UTxOs: \033[0m" 
-# echo -e "\n \033[1;35m ${script_reference_address} \033[0m \n";
-# ${cli} conway query utxo --address ${script_reference_address} ${network}
+echo -e "\033[1;35m Script Reference UTxOs: \033[0m" 
+echo -e "\n \033[1;35m ${script_reference_address} \033[0m \n";
+${cli} conway query utxo --address ${script_reference_address} ${network}
 
 # Loop through each -market folder
 for wallet_folder in wallets/*-wallet; do

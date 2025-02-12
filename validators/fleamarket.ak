@@ -30,7 +30,7 @@ validator contract {
               signature.is_valid(extra_signatories, market_datum.address)?
             //
             // user may buy this
-            Buy(output_offset) -> {
+            Buy { output_offset } -> {
               //
               // find the payment output for this input and check all the fields
               let Output { address, value, datum, reference_script } =
