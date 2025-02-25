@@ -1,12 +1,12 @@
 {
   "preamble": {
     "title": "logicalmechanism/fleamarket",
-    "description": "Aiken contracts for project 'logicalmechanism/fleamarket'",
-    "version": "0.0.0",
+    "description": "A Hyperstructure Token Marketplace",
+    "version": "1.0.0",
     "plutusVersion": "v3",
     "compiler": {
       "name": "Aiken",
-      "version": "v1.1.11+7c3c5a5"
+      "version": "v1.1.12+0da4f70"
     },
     "license": "Apache-2.0"
   },

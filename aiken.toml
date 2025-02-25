@@ -1,9 +1,9 @@
 name = "logicalmechanism/fleamarket"
-version = "0.0.0"
-compiler = "v1.1.11"
+version = "1.0.0"
+compiler = "v1.1.12"
 plutus = "v3"
 license = "Apache-2.0"
-description = "Aiken contracts for project 'logicalmechanism/fleamarket'"
+description = "A Hyperstructure Token Marketplace"
 
 [repository]
 user = "logicalmechanism"
