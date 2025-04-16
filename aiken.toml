@@ -1,6 +1,6 @@
 name = "logicalmechanism/fleamarket"
 version = "1.0.0"
-compiler = "v1.1.13"
+compiler = "v1.1.16"
 plutus = "v3"
 license = "Apache-2.0"
 description = "A Hyperstructure Token Marketplace"
