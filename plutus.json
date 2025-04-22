@@ -16,8 +16,8 @@
       "redeemer": {
         "schema": {}
       },
-      "compiledCode": "58180101003223259800b452689b2b2002573498010241000001",
-      "hash": "fc3fba593789b799f7defd5b8973edd8d14f1b9b16dce213ec8f31b1"
+      "compiledCode": "58190101003223259800b452689b2b2002573498010342f1ea0001",
+      "hash": "0ebaa0a7feaf6aeac846c03fd24d528ce1c77880c53e2d692f501f38"
     },
     {
       "title": "fleamarket.contract.spend",
@@ -55,6 +55,7 @@
     },
     "types/market/Redeemer": {
       "title": "Redeemer",
+      "description": "UTxos may be purchased via Buy or be removed or updated via RemoveOrUpdate.",
       "anyOf": [
         {
           "title": "Buy",

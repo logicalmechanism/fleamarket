@@ -1,4 +1,5 @@
-////
+//// A hyperstructure UTxO marketplace without fees or royalty payouts. UTxOs 
+//// may be traded for ADA or other tokens.
 ////
 
 use aiken/option

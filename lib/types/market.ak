@@ -1,11 +1,13 @@
 use cardano/address.{Address}
 use types/token.{Token}
 
+/// The Datum holds the owner address and the token payment required for the sale.
 pub type Datum {
   address: Address,
   token: Token,
 }
 
+/// UTxos may be purchased via Buy or be removed or updated via RemoveOrUpdate.
 pub type Redeemer {
   Buy { output_offset: Int }
   RemoveOrUpdate

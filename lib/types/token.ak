@@ -1,12 +1,16 @@
 use cardano/assets.{AssetName, PolicyId, Value}
 
+/// Generic Token type for payments.
 pub type Token {
   pid: PolicyId,
   tkn: AssetName,
   amt: Int,
 }
 
-///
+/// Check that a token is contained inside of a value. If the token is ADA then
+/// only ada can be contained in the value else ADA and the token must be contained
+/// inside the value. In the case of non-ADA tokens, the minimum required Lovelace
+/// is not validated as it will scale naturally.
 ///
 pub fn is_contained(self: Value, token: Token) -> Bool {
   if and {

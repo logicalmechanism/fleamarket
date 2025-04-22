@@ -3,7 +3,7 @@ use aiken/crypto.{VerificationKeyHash}
 use aiken/primitive/bytearray
 use cardano/address.{Address, VerificationKey}
 
-///
+/// Check if the signature is valid given a UTxO owner from the datum.
 ///
 pub fn is_valid(
   extra_signatories: List<VerificationKeyHash>,

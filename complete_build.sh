@@ -68,7 +68,7 @@ cardano-cli conway transaction policyid --script-file contracts/market_contract.
 echo -e "\033[1;33m Contract Hash: $(cat hashes/market.hash)\033[0m"
 
 # some random string to make the contracts unique
-rand="00"
+rand="f1ea"
 rand_cbor=$(python3 -c "import cbor2; print(cbor2.dumps(bytes.fromhex('${rand}')).hex())")
 
 echo -e "\033[1;37m\nBuilding Always False Contract\033[0m"

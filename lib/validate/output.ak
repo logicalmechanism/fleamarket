@@ -1,4 +1,5 @@
 //// Portions of this code are derived from [jpg-store] (https://github.com/jpg-store/contracts-v3/tree/main), licensed under the Apache License 2.0.
+////
 //// Changes made to the original jpg-store code:
 //// - Made datum tag a function.
 //// - Changed function names.
