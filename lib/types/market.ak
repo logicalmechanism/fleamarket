@@ -4,6 +4,7 @@ use types/token.{Token}
 /// The Datum holds the owner address and the token payment required for the sale.
 pub type Datum {
   address: Address,
+  // This is the cost of the sale
   token: Token,
 }
 

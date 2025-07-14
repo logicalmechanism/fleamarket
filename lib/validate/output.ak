@@ -30,7 +30,6 @@ test output_reference_is_unique() {
   and {
     data == #"d8799f58205038aae27f15421282dc71b28e0253e7168e8e60e8352131191e1704413d913a00ff",
     ( data |> blake2b_256 ) == #"019d93c81272a175ef78fc0805690219eacc062ff46a52c9840d554552a63f12",
-    datum == datum,
   }
 }
 
