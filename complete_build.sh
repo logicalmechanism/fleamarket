@@ -56,16 +56,21 @@ rm -fr build/ || true
 echo -e "\033[1;34m\nCompiling...\033[0m"
 
 # remove all traces
-aiken build --trace-level silent --trace-filter user-defined
+# aiken build --trace-level silent --trace-filter user-defined
 
 # keep the traces for testing if required
-# aiken build --trace-level verbose --trace-filter all
+aiken build --trace-level verbose --trace-filter all
 
 # build and apply parameters to each contract
-echo -e "\033[1;37m\nBuilding Contract\033[0m"
+echo -e "\033[1;37m\nBuilding Fleamarket Contract\033[0m"
 aiken blueprint convert -m fleamarket > contracts/market_contract.plutus
 cardano-cli conway transaction policyid --script-file contracts/market_contract.plutus > hashes/market.hash
-echo -e "\033[1;33m Contract Hash: $(cat hashes/market.hash)\033[0m"
+echo -e "\033[1;33m Fleamarket Contract Hash: $(cat hashes/market.hash)\033[0m"
+
+echo -e "\033[1;37m\nBuilding Deal Contract\033[0m"
+aiken blueprint convert -m deal > contracts/deal_contract.plutus
+cardano-cli conway transaction policyid --script-file contracts/deal_contract.plutus > hashes/deal.hash
+echo -e "\033[1;33m Deal Contract Hash: $(cat hashes/deal.hash)\033[0m"
 
 # some random string to make the contracts unique
 rand="f1ea"

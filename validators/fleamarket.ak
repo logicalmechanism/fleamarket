@@ -4,7 +4,7 @@
 
 use aiken/option
 use cardano/transaction.{Output, OutputReference, Transaction}
-use types/market.{Buy, Datum, Redeemer, RemoveOrUpdate}
+use types/market.{MarketBuy, MarketDatum, MarketRedeemer, MarketRemoveOrUpdate}
 use types/token
 use validate/output
 use validate/signature
@@ -12,7 +12,7 @@ use validate/signature
 validator contract {
   spend(
     maybe_datum: Option<Data>,
-    redeemer: Redeemer,
+    redeemer: MarketRedeemer,
     utxo: OutputReference,
     transaction: Transaction,
   ) {
@@ -20,18 +20,18 @@ validator contract {
     when maybe_datum is {
       // there is a datum on it so check if its in the correct form
       Some(market_datum) ->
-        if market_datum is Datum {
+        if market_datum is MarketDatum {
           let Transaction { outputs, extra_signatories, .. } = transaction
           //
           // it is the Datum type so check the redeemer
           when redeemer is {
             //
             // user may remove or update
-            RemoveOrUpdate ->
+            MarketRemoveOrUpdate ->
               signature.is_valid(extra_signatories, market_datum.address)?
             //
             // user may buy this
-            Buy { output_offset } -> {
+            MarketBuy { output_offset } -> {
               //
               // find the payment output for this input and check all the fields
               let Output { address, value, datum, reference_script } =
@@ -45,7 +45,7 @@ validator contract {
               //
               and {
                 (address == market_datum.address)?,
-                (datum == output.is_unique(utxo))?,
+                (datum == output.seller_output_is_unique(utxo))?,
                 (reference_script |> option.is_none)?,
                 token.is_contained(value, market_datum.token)?,
                 (market_datum.token.amt > 0)?,

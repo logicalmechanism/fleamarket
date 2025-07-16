@@ -2,16 +2,16 @@ use cardano/address.{Address}
 use types/token.{Token}
 
 /// The Datum holds the owner address and the token payment required for the sale.
-pub type Datum {
+pub type MarketDatum {
   address: Address,
   // This is the cost of the sale
   token: Token,
 }
 
 /// UTxos may be purchased via Buy or be removed or updated via RemoveOrUpdate.
-pub type Redeemer {
-  Buy { output_offset: Int }
-  RemoveOrUpdate
+pub type MarketRedeemer {
+  MarketBuy { output_offset: Int }
+  MarketRemoveOrUpdate
 }
 
 // need to trace the address to know how to build it

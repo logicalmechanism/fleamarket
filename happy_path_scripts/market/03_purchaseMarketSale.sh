@@ -53,16 +53,16 @@ if [ "${TXNS}" -eq "0" ]; then
    exit;
 fi
 
-market_datum_file_path="../data/market-datum.json"
-output_datum_file_path="../data/output-datum.json"
+market_datum_file_path="../data/market/market-datum.json"
+output_datum_file_path="../data/market/output-datum.json"
 
 TXIN=$(jq -r --arg alltxin "" --arg seller_pkh "$seller_pkh" 'to_entries[] | select(.value.inlineDatum.fields[0].fields[0].fields[0].bytes == $seller_pkh) | .key | . + $alltxin + " --tx-in"' ../tmp/market_utxo.json)
 script_tx_in=${TXIN::-8}
 
 # assume lovelace for now
-payment_pid=$(jq -r --arg script_tx_in "$script_tx_in" '.[$script_tx_in].inlineDatum.fields[1].fields[0].bytes' ../tmp/market_utxo.json)
-payment_tkn=$(jq -r --arg script_tx_in "$script_tx_in" '.[$script_tx_in].inlineDatum.fields[1].fields[1].bytes' ../tmp/market_utxo.json)
-payment_amt=$(jq -r --arg script_tx_in "$script_tx_in" '.[$script_tx_in].inlineDatum.fields[1].fields[2].int' ../tmp/market_utxo.json)
+payment_pid=$(jq -r --arg script_tx_in "$script_tx_in" '.[$script_tx_in].inlineDatum.fields[2].fields[0].bytes' ../tmp/market_utxo.json)
+payment_tkn=$(jq -r --arg script_tx_in "$script_tx_in" '.[$script_tx_in].inlineDatum.fields[2].fields[1].bytes' ../tmp/market_utxo.json)
+payment_amt=$(jq -r --arg script_tx_in "$script_tx_in" '.[$script_tx_in].inlineDatum.fields[2].fields[2].int' ../tmp/market_utxo.json)
 
 if [ -z "$payment_pid" ]; then
     seller_output="${output_address} + ${payment_amt}"
@@ -107,7 +107,7 @@ FEE=$(${cli} conway transaction build \
     --spending-tx-in-reference="${script_ref_utxo}#1" \
     --spending-plutus-script-v3 \
     --spending-reference-tx-in-inline-datum-present \
-    --spending-reference-tx-in-redeemer-file ../data/buy-redeemer.json \
+    --spending-reference-tx-in-redeemer-file ../data/market/buy-redeemer.json \
     --tx-out="${seller_output}" \
     --tx-out-inline-datum-file ${output_datum_file_path} \
     --required-signer-hash ${collat_pkh} \
@@ -132,6 +132,3 @@ echo -e "\033[0;36m Submitting \033[0m"
 ${cli} conway transaction submit \
     ${network} \
     --tx-file ../tmp/tx.signed
-
-tx=$(${cli} conway transaction txid --tx-file ../tmp/tx.signed)
-echo "Tx Hash:" $tx
