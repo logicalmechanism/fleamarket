@@ -16,6 +16,7 @@ pub fn seller_output_is_unique(output_reference: OutputReference) -> Datum {
     |> InlineDatum
 }
 
+// doubled hashed
 pub fn buyer_output_is_unique(output_reference: OutputReference) -> Datum {
   output_reference
     |> serialise_data

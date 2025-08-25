@@ -1,5 +1,6 @@
 //// A hyperstructure UTxO deal without fees or royalty payouts. UTxOs 
-//// may be traded for ADA or other tokens.
+//// may be traded for ADA or other tokens. A deal is between the seller
+//// and the buyer only.
 ////
 
 use aiken/option
@@ -34,7 +35,7 @@ validator contract {
               signature.is_valid(extra_signatories, market_datum.seller)?
             //
             // user may buy this
-            DealBuy -> {
+            DealBuy { output_offset } -> {
               // we need to get this value
               expect Some(this_input): Option<Input> =
                 inputs
@@ -47,14 +48,14 @@ validator contract {
                 value: seller_value,
                 datum: seller_datum,
                 reference_script: seller_reference_script,
-              } = output.find_payment(outputs, 0)
+              } = output.find_payment(outputs, output_offset)
               // find the buyer output for this input and check all the fields
               let Output {
                 address: buyer_address,
                 value: buyer_value,
                 datum: buyer_datum,
                 reference_script: buyer_reference_script,
-              } = output.find_payment(outputs, 1)
+              } = output.find_payment(outputs, output_offset + 1)
               //
               //
               //

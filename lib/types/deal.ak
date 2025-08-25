@@ -11,6 +11,6 @@ pub type DealDatum {
 
 /// UTxos may be purchased via Buy or be removed or updated via RemoveOrUpdate.
 pub type DealRedeemer {
-  DealBuy
+  DealBuy { output_offset: Int }
   DealRemoveOrUpdate
 }
